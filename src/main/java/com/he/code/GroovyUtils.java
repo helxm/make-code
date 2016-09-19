@@ -31,7 +31,7 @@ public class GroovyUtils {
 	public static Logger logger = Logger.getLogger(GroovyUtils.class);
 	
 	public static GroovyClassLoader loader = null;
-	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?user=yuyu&password=111qqq,,,&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
+	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?root=xxx&password=xxx&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
 	private static String db = "pugilistadmin_test";
 	public GroovyUtils() {
 		if(loader == null){
