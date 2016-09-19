@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pugilist.persistence.dao.GymMapper">
+  <resultMap id="BaseResultMap" type="com.pugilist.model.Gym">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="gym_type" jdbcType="VARCHAR" property="gym_type" />
+    <result column="gym_open_time" jdbcType="VARCHAR" property="gym_open_time" />
+    <result column="gym_location" jdbcType="VARCHAR" property="gym_location" />
+    <result column="gym_coach_num" jdbcType="INTEGER" property="gym_coach_num" />
+    <result column="gym_boxer" jdbcType="VARCHAR" property="gym_boxer" />
+    <result column="gym_coach_star" jdbcType="VARCHAR" property="gym_coach_star" />
+    <result column="gym_tel" jdbcType="VARCHAR" property="gym_tel" />
+    <result column="gym_place_num" jdbcType="INTEGER" property="gym_place_num" />
+    <result column="gym_show_video" jdbcType="VARCHAR" property="gym_show_video" />
+    <result column="gym_show_img" jdbcType="VARCHAR" property="gym_show_img" />
+    <result column="gym_name" jdbcType="VARCHAR" property="gym_name" />
+    <result column="gym_corporationid" jdbcType="INTEGER" property="gym_corporationid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="isShow" jdbcType="INTEGER" property="isShow" />
+    <result column="viewCount" jdbcType="INTEGER" property="viewCount" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentCount" />
+    <result column="voteCount" jdbcType="INTEGER" property="voteCount" />
+    <result column="operate_adminid" jdbcType="INTEGER" property="operate_adminid" />
+    <result column="gym_from" jdbcType="INTEGER" property="gym_from" />
+    <result column="urlPrefix" jdbcType="VARCHAR" property="urlPrefix" />
+    <result column="city_id" jdbcType="INTEGER" property="city_id" />
+    <result column="is_hot" jdbcType="INTEGER" property="is_hot" />
+    <result column="fansCount" jdbcType="INTEGER" property="fansCount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pugilist.model.Gym">
+    <result column="gym_show_img_more" jdbcType="LONGVARCHAR" property="gym_show_img_more" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, gym_type, gym_open_time, gym_location, gym_coach_num, gym_boxer, gym_coach_star, 
+    gym_tel, gym_place_num, gym_show_video, gym_show_img, gym_name, gym_corporationid, 
+    createtime, updatetime, city, isShow, viewCount, commentCount, voteCount, operate_adminid, 
+    gym_from, urlPrefix, city_id, is_hot, fansCount
+  </sql>
+  <sql id="Blob_Column_List">
+    gym_show_img_more
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.pugilist.model.GymExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from p_gym
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.pugilist.model.GymExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from p_gym
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from p_gym
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_gym
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pugilist.model.GymExample">
+    delete from p_gym
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pugilist.model.Gym">
+    insert into p_gym (id, gym_type, gym_open_time, 
+      gym_location, gym_coach_num, gym_boxer, 
+      gym_coach_star, gym_tel, gym_place_num, 
+      gym_show_video, gym_show_img, gym_name, 
+      gym_corporationid, createtime, updatetime, 
+      city, isShow, viewCount, 
+      commentCount, voteCount, operate_adminid, 
+      gym_from, urlPrefix, city_id, 
+      is_hot, fansCount, gym_show_img_more
+      )
+    values (#{id,jdbcType=INTEGER}, #{gym_type,jdbcType=VARCHAR}, #{gym_open_time,jdbcType=VARCHAR}, 
+      #{gym_location,jdbcType=VARCHAR}, #{gym_coach_num,jdbcType=INTEGER}, #{gym_boxer,jdbcType=VARCHAR}, 
+      #{gym_coach_star,jdbcType=VARCHAR}, #{gym_tel,jdbcType=VARCHAR}, #{gym_place_num,jdbcType=INTEGER}, 
+      #{gym_show_video,jdbcType=VARCHAR}, #{gym_show_img,jdbcType=VARCHAR}, #{gym_name,jdbcType=VARCHAR}, 
+      #{gym_corporationid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{city,jdbcType=VARCHAR}, #{isShow,jdbcType=INTEGER}, #{viewCount,jdbcType=INTEGER}, 
+      #{commentCount,jdbcType=INTEGER}, #{voteCount,jdbcType=INTEGER}, #{operate_adminid,jdbcType=INTEGER}, 
+      #{gym_from,jdbcType=INTEGER}, #{urlPrefix,jdbcType=VARCHAR}, #{city_id,jdbcType=INTEGER}, 
+      #{is_hot,jdbcType=INTEGER}, #{fansCount,jdbcType=INTEGER}, #{gym_show_img_more,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pugilist.model.Gym">
+    insert into p_gym
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="gym_type != null">
+        gym_type,
+      </if>
+      <if test="gym_open_time != null">
+        gym_open_time,
+      </if>
+      <if test="gym_location != null">
+        gym_location,
+      </if>
+      <if test="gym_coach_num != null">
+        gym_coach_num,
+      </if>
+      <if test="gym_boxer != null">
+        gym_boxer,
+      </if>
+      <if test="gym_coach_star != null">
+        gym_coach_star,
+      </if>
+      <if test="gym_tel != null">
+        gym_tel,
+      </if>
+      <if test="gym_place_num != null">
+        gym_place_num,
+      </if>
+      <if test="gym_show_video != null">
+        gym_show_video,
+      </if>
+      <if test="gym_show_img != null">
+        gym_show_img,
+      </if>
+      <if test="gym_name != null">
+        gym_name,
+      </if>
+      <if test="gym_corporationid != null">
+        gym_corporationid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="isShow != null">
+        isShow,
+      </if>
+      <if test="viewCount != null">
+        viewCount,
+      </if>
+      <if test="commentCount != null">
+        commentCount,
+      </if>
+      <if test="voteCount != null">
+        voteCount,
+      </if>
+      <if test="operate_adminid != null">
+        operate_adminid,
+      </if>
+      <if test="gym_from != null">
+        gym_from,
+      </if>
+      <if test="urlPrefix != null">
+        urlPrefix,
+      </if>
+      <if test="city_id != null">
+        city_id,
+      </if>
+      <if test="is_hot != null">
+        is_hot,
+      </if>
+      <if test="fansCount != null">
+        fansCount,
+      </if>
+      <if test="gym_show_img_more != null">
+        gym_show_img_more,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="gym_type != null">
+        #{gym_type,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_open_time != null">
+        #{gym_open_time,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_location != null">
+        #{gym_location,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_coach_num != null">
+        #{gym_coach_num,jdbcType=INTEGER},
+      </if>
+      <if test="gym_boxer != null">
+        #{gym_boxer,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_coach_star != null">
+        #{gym_coach_star,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_tel != null">
+        #{gym_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_place_num != null">
+        #{gym_place_num,jdbcType=INTEGER},
+      </if>
+      <if test="gym_show_video != null">
+        #{gym_show_video,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_show_img != null">
+        #{gym_show_img,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_name != null">
+        #{gym_name,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_corporationid != null">
+        #{gym_corporationid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="voteCount != null">
+        #{voteCount,jdbcType=INTEGER},
+      </if>
+      <if test="operate_adminid != null">
+        #{operate_adminid,jdbcType=INTEGER},
+      </if>
+      <if test="gym_from != null">
+        #{gym_from,jdbcType=INTEGER},
+      </if>
+      <if test="urlPrefix != null">
+        #{urlPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="city_id != null">
+        #{city_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_hot != null">
+        #{is_hot,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null">
+        #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="gym_show_img_more != null">
+        #{gym_show_img_more,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pugilist.model.GymExample" resultType="java.lang.Integer">
+    select count(*) from p_gym
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update p_gym
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.gym_type != null">
+        gym_type = #{record.gym_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_open_time != null">
+        gym_open_time = #{record.gym_open_time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_location != null">
+        gym_location = #{record.gym_location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_coach_num != null">
+        gym_coach_num = #{record.gym_coach_num,jdbcType=INTEGER},
+      </if>
+      <if test="record.gym_boxer != null">
+        gym_boxer = #{record.gym_boxer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_coach_star != null">
+        gym_coach_star = #{record.gym_coach_star,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_tel != null">
+        gym_tel = #{record.gym_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_place_num != null">
+        gym_place_num = #{record.gym_place_num,jdbcType=INTEGER},
+      </if>
+      <if test="record.gym_show_video != null">
+        gym_show_video = #{record.gym_show_video,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_show_img != null">
+        gym_show_img = #{record.gym_show_img,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_name != null">
+        gym_name = #{record.gym_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gym_corporationid != null">
+        gym_corporationid = #{record.gym_corporationid,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isShow != null">
+        isShow = #{record.isShow,jdbcType=INTEGER},
+      </if>
+      <if test="record.viewCount != null">
+        viewCount = #{record.viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentCount != null">
+        commentCount = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.voteCount != null">
+        voteCount = #{record.voteCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.operate_adminid != null">
+        operate_adminid = #{record.operate_adminid,jdbcType=INTEGER},
+      </if>
+      <if test="record.gym_from != null">
+        gym_from = #{record.gym_from,jdbcType=INTEGER},
+      </if>
+      <if test="record.urlPrefix != null">
+        urlPrefix = #{record.urlPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city_id != null">
+        city_id = #{record.city_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.is_hot != null">
+        is_hot = #{record.is_hot,jdbcType=INTEGER},
+      </if>
+      <if test="record.fansCount != null">
+        fansCount = #{record.fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.gym_show_img_more != null">
+        gym_show_img_more = #{record.gym_show_img_more,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update p_gym
+    set id = #{record.id,jdbcType=INTEGER},
+      gym_type = #{record.gym_type,jdbcType=VARCHAR},
+      gym_open_time = #{record.gym_open_time,jdbcType=VARCHAR},
+      gym_location = #{record.gym_location,jdbcType=VARCHAR},
+      gym_coach_num = #{record.gym_coach_num,jdbcType=INTEGER},
+      gym_boxer = #{record.gym_boxer,jdbcType=VARCHAR},
+      gym_coach_star = #{record.gym_coach_star,jdbcType=VARCHAR},
+      gym_tel = #{record.gym_tel,jdbcType=VARCHAR},
+      gym_place_num = #{record.gym_place_num,jdbcType=INTEGER},
+      gym_show_video = #{record.gym_show_video,jdbcType=VARCHAR},
+      gym_show_img = #{record.gym_show_img,jdbcType=VARCHAR},
+      gym_name = #{record.gym_name,jdbcType=VARCHAR},
+      gym_corporationid = #{record.gym_corporationid,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      city = #{record.city,jdbcType=VARCHAR},
+      isShow = #{record.isShow,jdbcType=INTEGER},
+      viewCount = #{record.viewCount,jdbcType=INTEGER},
+      commentCount = #{record.commentCount,jdbcType=INTEGER},
+      voteCount = #{record.voteCount,jdbcType=INTEGER},
+      operate_adminid = #{record.operate_adminid,jdbcType=INTEGER},
+      gym_from = #{record.gym_from,jdbcType=INTEGER},
+      urlPrefix = #{record.urlPrefix,jdbcType=VARCHAR},
+      city_id = #{record.city_id,jdbcType=INTEGER},
+      is_hot = #{record.is_hot,jdbcType=INTEGER},
+      fansCount = #{record.fansCount,jdbcType=INTEGER},
+      gym_show_img_more = #{record.gym_show_img_more,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update p_gym
+    set id = #{record.id,jdbcType=INTEGER},
+      gym_type = #{record.gym_type,jdbcType=VARCHAR},
+      gym_open_time = #{record.gym_open_time,jdbcType=VARCHAR},
+      gym_location = #{record.gym_location,jdbcType=VARCHAR},
+      gym_coach_num = #{record.gym_coach_num,jdbcType=INTEGER},
+      gym_boxer = #{record.gym_boxer,jdbcType=VARCHAR},
+      gym_coach_star = #{record.gym_coach_star,jdbcType=VARCHAR},
+      gym_tel = #{record.gym_tel,jdbcType=VARCHAR},
+      gym_place_num = #{record.gym_place_num,jdbcType=INTEGER},
+      gym_show_video = #{record.gym_show_video,jdbcType=VARCHAR},
+      gym_show_img = #{record.gym_show_img,jdbcType=VARCHAR},
+      gym_name = #{record.gym_name,jdbcType=VARCHAR},
+      gym_corporationid = #{record.gym_corporationid,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      city = #{record.city,jdbcType=VARCHAR},
+      isShow = #{record.isShow,jdbcType=INTEGER},
+      viewCount = #{record.viewCount,jdbcType=INTEGER},
+      commentCount = #{record.commentCount,jdbcType=INTEGER},
+      voteCount = #{record.voteCount,jdbcType=INTEGER},
+      operate_adminid = #{record.operate_adminid,jdbcType=INTEGER},
+      gym_from = #{record.gym_from,jdbcType=INTEGER},
+      urlPrefix = #{record.urlPrefix,jdbcType=VARCHAR},
+      city_id = #{record.city_id,jdbcType=INTEGER},
+      is_hot = #{record.is_hot,jdbcType=INTEGER},
+      fansCount = #{record.fansCount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pugilist.model.Gym">
+    update p_gym
+    <set>
+      <if test="gym_type != null">
+        gym_type = #{gym_type,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_open_time != null">
+        gym_open_time = #{gym_open_time,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_location != null">
+        gym_location = #{gym_location,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_coach_num != null">
+        gym_coach_num = #{gym_coach_num,jdbcType=INTEGER},
+      </if>
+      <if test="gym_boxer != null">
+        gym_boxer = #{gym_boxer,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_coach_star != null">
+        gym_coach_star = #{gym_coach_star,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_tel != null">
+        gym_tel = #{gym_tel,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_place_num != null">
+        gym_place_num = #{gym_place_num,jdbcType=INTEGER},
+      </if>
+      <if test="gym_show_video != null">
+        gym_show_video = #{gym_show_video,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_show_img != null">
+        gym_show_img = #{gym_show_img,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_name != null">
+        gym_name = #{gym_name,jdbcType=VARCHAR},
+      </if>
+      <if test="gym_corporationid != null">
+        gym_corporationid = #{gym_corporationid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="isShow != null">
+        isShow = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="viewCount != null">
+        viewCount = #{viewCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        commentCount = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="voteCount != null">
+        voteCount = #{voteCount,jdbcType=INTEGER},
+      </if>
+      <if test="operate_adminid != null">
+        operate_adminid = #{operate_adminid,jdbcType=INTEGER},
+      </if>
+      <if test="gym_from != null">
+        gym_from = #{gym_from,jdbcType=INTEGER},
+      </if>
+      <if test="urlPrefix != null">
+        urlPrefix = #{urlPrefix,jdbcType=VARCHAR},
+      </if>
+      <if test="city_id != null">
+        city_id = #{city_id,jdbcType=INTEGER},
+      </if>
+      <if test="is_hot != null">
+        is_hot = #{is_hot,jdbcType=INTEGER},
+      </if>
+      <if test="fansCount != null">
+        fansCount = #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="gym_show_img_more != null">
+        gym_show_img_more = #{gym_show_img_more,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pugilist.model.Gym">
+    update p_gym
+    set gym_type = #{gym_type,jdbcType=VARCHAR},
+      gym_open_time = #{gym_open_time,jdbcType=VARCHAR},
+      gym_location = #{gym_location,jdbcType=VARCHAR},
+      gym_coach_num = #{gym_coach_num,jdbcType=INTEGER},
+      gym_boxer = #{gym_boxer,jdbcType=VARCHAR},
+      gym_coach_star = #{gym_coach_star,jdbcType=VARCHAR},
+      gym_tel = #{gym_tel,jdbcType=VARCHAR},
+      gym_place_num = #{gym_place_num,jdbcType=INTEGER},
+      gym_show_video = #{gym_show_video,jdbcType=VARCHAR},
+      gym_show_img = #{gym_show_img,jdbcType=VARCHAR},
+      gym_name = #{gym_name,jdbcType=VARCHAR},
+      gym_corporationid = #{gym_corporationid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      city = #{city,jdbcType=VARCHAR},
+      isShow = #{isShow,jdbcType=INTEGER},
+      viewCount = #{viewCount,jdbcType=INTEGER},
+      commentCount = #{commentCount,jdbcType=INTEGER},
+      voteCount = #{voteCount,jdbcType=INTEGER},
+      operate_adminid = #{operate_adminid,jdbcType=INTEGER},
+      gym_from = #{gym_from,jdbcType=INTEGER},
+      urlPrefix = #{urlPrefix,jdbcType=VARCHAR},
+      city_id = #{city_id,jdbcType=INTEGER},
+      is_hot = #{is_hot,jdbcType=INTEGER},
+      fansCount = #{fansCount,jdbcType=INTEGER},
+      gym_show_img_more = #{gym_show_img_more,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pugilist.model.Gym">
+    update p_gym
+    set gym_type = #{gym_type,jdbcType=VARCHAR},
+      gym_open_time = #{gym_open_time,jdbcType=VARCHAR},
+      gym_location = #{gym_location,jdbcType=VARCHAR},
+      gym_coach_num = #{gym_coach_num,jdbcType=INTEGER},
+      gym_boxer = #{gym_boxer,jdbcType=VARCHAR},
+      gym_coach_star = #{gym_coach_star,jdbcType=VARCHAR},
+      gym_tel = #{gym_tel,jdbcType=VARCHAR},
+      gym_place_num = #{gym_place_num,jdbcType=INTEGER},
+      gym_show_video = #{gym_show_video,jdbcType=VARCHAR},
+      gym_show_img = #{gym_show_img,jdbcType=VARCHAR},
+      gym_name = #{gym_name,jdbcType=VARCHAR},
+      gym_corporationid = #{gym_corporationid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      city = #{city,jdbcType=VARCHAR},
+      isShow = #{isShow,jdbcType=INTEGER},
+      viewCount = #{viewCount,jdbcType=INTEGER},
+      commentCount = #{commentCount,jdbcType=INTEGER},
+      voteCount = #{voteCount,jdbcType=INTEGER},
+      operate_adminid = #{operate_adminid,jdbcType=INTEGER},
+      gym_from = #{gym_from,jdbcType=INTEGER},
+      urlPrefix = #{urlPrefix,jdbcType=VARCHAR},
+      city_id = #{city_id,jdbcType=INTEGER},
+      is_hot = #{is_hot,jdbcType=INTEGER},
+      fansCount = #{fansCount,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

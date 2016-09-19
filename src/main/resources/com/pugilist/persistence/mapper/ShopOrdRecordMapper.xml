@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pugilist.persistence.dao.ShopOrdRecordMapper">
+  <resultMap id="BaseResultMap" type="com.pugilist.model.ShopOrdRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ord_no" jdbcType="VARCHAR" property="ord_no" />
+    <result column="action_time" jdbcType="TIMESTAMP" property="action_time" />
+    <result column="action_type" jdbcType="INTEGER" property="action_type" />
+    <result column="action_info" jdbcType="VARCHAR" property="action_info" />
+    <result column="isDelated" jdbcType="CHAR" property="isDelated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ord_no, action_time, action_type, action_info, isDelated
+  </sql>
+  <select id="selectByExample" parameterType="com.pugilist.model.ShopOrdRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from p_shop_ord_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_shop_ord_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_shop_ord_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pugilist.model.ShopOrdRecordExample">
+    delete from p_shop_ord_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pugilist.model.ShopOrdRecord">
+    insert into p_shop_ord_record (id, ord_no, action_time, 
+      action_type, action_info, isDelated
+      )
+    values (#{id,jdbcType=INTEGER}, #{ord_no,jdbcType=VARCHAR}, #{action_time,jdbcType=TIMESTAMP}, 
+      #{action_type,jdbcType=INTEGER}, #{action_info,jdbcType=VARCHAR}, #{isDelated,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pugilist.model.ShopOrdRecord">
+    insert into p_shop_ord_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ord_no != null">
+        ord_no,
+      </if>
+      <if test="action_time != null">
+        action_time,
+      </if>
+      <if test="action_type != null">
+        action_type,
+      </if>
+      <if test="action_info != null">
+        action_info,
+      </if>
+      <if test="isDelated != null">
+        isDelated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ord_no != null">
+        #{ord_no,jdbcType=VARCHAR},
+      </if>
+      <if test="action_time != null">
+        #{action_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="action_type != null">
+        #{action_type,jdbcType=INTEGER},
+      </if>
+      <if test="action_info != null">
+        #{action_info,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelated != null">
+        #{isDelated,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pugilist.model.ShopOrdRecordExample" resultType="java.lang.Integer">
+    select count(*) from p_shop_ord_record
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update p_shop_ord_record
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.ord_no != null">
+        ord_no = #{record.ord_no,jdbcType=VARCHAR},
+      </if>
+      <if test="record.action_time != null">
+        action_time = #{record.action_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.action_type != null">
+        action_type = #{record.action_type,jdbcType=INTEGER},
+      </if>
+      <if test="record.action_info != null">
+        action_info = #{record.action_info,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelated != null">
+        isDelated = #{record.isDelated,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update p_shop_ord_record
+    set id = #{record.id,jdbcType=INTEGER},
+      ord_no = #{record.ord_no,jdbcType=VARCHAR},
+      action_time = #{record.action_time,jdbcType=TIMESTAMP},
+      action_type = #{record.action_type,jdbcType=INTEGER},
+      action_info = #{record.action_info,jdbcType=VARCHAR},
+      isDelated = #{record.isDelated,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pugilist.model.ShopOrdRecord">
+    update p_shop_ord_record
+    <set>
+      <if test="ord_no != null">
+        ord_no = #{ord_no,jdbcType=VARCHAR},
+      </if>
+      <if test="action_time != null">
+        action_time = #{action_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="action_type != null">
+        action_type = #{action_type,jdbcType=INTEGER},
+      </if>
+      <if test="action_info != null">
+        action_info = #{action_info,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelated != null">
+        isDelated = #{isDelated,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pugilist.model.ShopOrdRecord">
+    update p_shop_ord_record
+    set ord_no = #{ord_no,jdbcType=VARCHAR},
+      action_time = #{action_time,jdbcType=TIMESTAMP},
+      action_type = #{action_type,jdbcType=INTEGER},
+      action_info = #{action_info,jdbcType=VARCHAR},
+      isDelated = #{isDelated,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<select id="find" resultType="com.rainbowbus.bean.api.ShopOrdRecordBean">
+	    select 
+	    	*
+	    from p_shop_order
+	    where 1=1
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="ord_no != null and ord_no != ''">
+			and ord_no = #{ord_no}
+		</if>
+		<if test="action_type != null">
+			and action_type = #{action_type}
+		</if>
+	</select>
+	
+  <resultMap id="BaseResultMap" type="com.rainbowbus.bean.api.ShopOrdRecordBean">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ord_no" jdbcType="VARCHAR" property="ord_no" />
+    <result column="action_time" jdbcType="TIMESTAMP" property="action_time" />
+    <result column="action_type" jdbcType="INTEGER" property="action_type" />
+    <result column="action_info" jdbcType="VARCHAR" property="action_info" />
+    <result column="isDelated" jdbcType="CHAR" property="isDelated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ord_no, action_time, action_type, action_info, isDelated
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from p_shop_ord_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from p_shop_ord_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rainbowbus.bean.api.ShopOrdRecordBean">
+    insert into p_shop_ord_record (id, ord_no, action_time, 
+      action_type, action_info, isDelated
+      )
+    values (#{id,jdbcType=INTEGER}, #{ord_no,jdbcType=VARCHAR}, #{action_time,jdbcType=TIMESTAMP}, 
+      #{action_type,jdbcType=INTEGER}, #{action_info,jdbcType=VARCHAR}, #{isDelated,jdbcType=CHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.rainbowbus.bean.api.ShopOrdRecordBean">
+    update p_shop_ord_record
+    set ord_no = #{ord_no,jdbcType=VARCHAR},
+      action_time = #{action_time,jdbcType=TIMESTAMP},
+      action_type = #{action_type,jdbcType=INTEGER},
+      action_info = #{action_info,jdbcType=VARCHAR},
+      isDelated = #{isDelated,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

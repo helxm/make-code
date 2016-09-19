@@ -1,0 +1,10 @@
+package com.rainbowbus.mapper;
+
+import java.util.List;
+
+import com.rainbowbus.bean.api.${modelName}Bean;
+import com.rainbowbus.mapper.base.BaseMapper;
+
+public interface ${modelName}Mapper extends BaseMapper<${modelName}Bean, Long>{
+	List<${modelName}Bean> queryAll(${modelName}Bean record);
+}

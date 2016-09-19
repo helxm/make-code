@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="t_cumulation_wall_detail_refund_wx">
+  <resultMap class="com.pugilist.model.PayWeixinRefundBean" id="BaseResultMap">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="mch_id" jdbcType="VARCHAR" property="mchId" />
+    <result column="out_trade_no" jdbcType="VARCHAR" property="outTradeNo" />
+    <result column="transaction_id" jdbcType="VARCHAR" property="transactionId" />
+    <result column="total_fee" jdbcType="INTEGER" property="totalFee" />
+    <result column="refund_fee" jdbcType="INTEGER" property="refundFee" />
+    <result column="refund_fee_type" jdbcType="VARCHAR" property="refundFeeType" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="out_refund_no" jdbcType="VARCHAR" property="outRefundNo" />
+    <result column="return_code" jdbcType="VARCHAR" property="returnCode" />
+    <result column="return_msg" jdbcType="VARCHAR" property="returnMsg" />
+    <result column="result_code" jdbcType="VARCHAR" property="resultCode" />
+    <result column="err_code" jdbcType="VARCHAR" property="errCode" />
+    <result column="err_code_des" jdbcType="VARCHAR" property="errCodeDes" />
+    <result column="refund_id" jdbcType="VARCHAR" property="refundId" />
+    <result column="refund_channel" jdbcType="VARCHAR" property="refundChannel" />
+    <result column="cash_fee" jdbcType="INTEGER" property="cashFee" />
+    <result column="cash_refund_fee" jdbcType="INTEGER" property="cashRefundFee" />
+    <result column="fee_type" jdbcType="VARCHAR" property="feeType" />
+    <result column="refund_count" jdbcType="INTEGER" property="refundCount" />
+    <result column="out_refund_no_$n" jdbcType="VARCHAR" property="outRefundNoN" />
+    <result column="refund_id_$n" jdbcType="VARCHAR" property="refundIdN" />
+    <result column="refund_channel_$n" jdbcType="VARCHAR" property="refundChannelN" />
+    <result column="refund_fee_$n" jdbcType="INTEGER" property="refundFeeN" />
+    <result column="refund_status_$n" jdbcType="VARCHAR" property="refundStatusN" />
+    <result column="refund_recv_accout_$n" jdbcType="VARCHAR" property="refundRecvAccoutN" />
+    <result column="isDelated" jdbcType="CHAR" property="isdelated" />
+    <result column="createName" jdbcType="VARCHAR" property="createname" />
+    <result column="updateName" jdbcType="VARCHAR" property="updatename" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <iterate conjunction="or" prepend="where" property="oredCriteria" removeFirstPrepend="iterate">
+      <isEqual compareValue="true" property="oredCriteria[].valid">
+        (
+        <iterate conjunction="and" prepend="and" property="oredCriteria[].criteriaWithoutValue">
+          $oredCriteria[].criteriaWithoutValue[]$
+        </iterate>
+        <iterate conjunction="and" prepend="and" property="oredCriteria[].criteriaWithSingleValue">
+          $oredCriteria[].criteriaWithSingleValue[].condition$ #oredCriteria[].criteriaWithSingleValue[].value#
+        </iterate>
+        <iterate conjunction="and" prepend="and" property="oredCriteria[].criteriaWithListValue">
+          $oredCriteria[].criteriaWithListValue[].condition$
+          <iterate close=")" conjunction="," open="(" property="oredCriteria[].criteriaWithListValue[].values">
+            #oredCriteria[].criteriaWithListValue[].values[]#
+          </iterate>
+        </iterate>
+        <iterate conjunction="and" prepend="and" property="oredCriteria[].criteriaWithBetweenValue">
+          $oredCriteria[].criteriaWithBetweenValue[].condition$
+          #oredCriteria[].criteriaWithBetweenValue[].values[0]# and
+          #oredCriteria[].criteriaWithBetweenValue[].values[1]#
+        </iterate>
+        )
+      </isEqual>
+    </iterate>
+  </sql>
+  <sql id="Base_Column_List">
+    id, appid, mch_id, out_trade_no, transaction_id, total_fee, refund_fee, refund_fee_type, 
+    userId, out_refund_no, return_code, return_msg, result_code, err_code, err_code_des, 
+    refund_id, refund_channel, cash_fee, cash_refund_fee, fee_type, refund_count, out_refund_no_$$n, 
+    refund_id_$$n, refund_channel_$$n, refund_fee_$$n, refund_status_$$n, refund_recv_accout_$$n, 
+    isDelated, createName, updateName, createTime, updateTime
+  </sql>
+  <select id="selectByExample" parameterClass="com.pugilist.model.PayWeixinRefundBeanExample" resultMap="BaseResultMap">
+    select
+    <isParameterPresent>
+      <isEqual compareValue="true" property="distinct">
+        distinct
+      </isEqual>
+    </isParameterPresent>
+    <include refid="t_cumulation_wall_detail_refund_wx.Base_Column_List" />
+    from t_cumulation_wall_detail_refund_wx
+    <isParameterPresent>
+      <include refid="t_cumulation_wall_detail_refund_wx.Example_Where_Clause" />
+      <isNotNull property="orderByClause">
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
+  </select>
+  <select id="selectByPrimaryKey" parameterClass="com.pugilist.model.PayWeixinRefundBean" resultMap="BaseResultMap">
+    select 
+    <include refid="t_cumulation_wall_detail_refund_wx.Base_Column_List" />
+    from t_cumulation_wall_detail_refund_wx
+    where id = #id:BIGINT#
+  </select>
+  <delete id="deleteByPrimaryKey" parameterClass="com.pugilist.model.PayWeixinRefundBean">
+    delete from t_cumulation_wall_detail_refund_wx
+    where id = #id:BIGINT#
+  </delete>
+  <delete id="deleteByExample" parameterClass="com.pugilist.model.PayWeixinRefundBeanExample">
+    delete from t_cumulation_wall_detail_refund_wx
+    <include refid="t_cumulation_wall_detail_refund_wx.Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterClass="com.pugilist.model.PayWeixinRefundBean">
+    insert into t_cumulation_wall_detail_refund_wx (id, appid, mch_id, out_trade_no, transaction_id, 
+      total_fee, refund_fee, refund_fee_type, userId, 
+      out_refund_no, return_code, return_msg, result_code, 
+      err_code, err_code_des, refund_id, refund_channel, 
+      cash_fee, cash_refund_fee, fee_type, refund_count, 
+      out_refund_no_$$n, refund_id_$$n, refund_channel_$$n, refund_fee_$$n, 
+      refund_status_$$n, refund_recv_accout_$$n, isDelated, createName, 
+      updateName, createTime, updateTime)
+    values (#id:BIGINT#, #appid:VARCHAR#, #mchId:VARCHAR#, #outTradeNo:VARCHAR#, #transactionId:VARCHAR#, 
+      #totalFee:INTEGER#, #refundFee:INTEGER#, #refundFeeType:VARCHAR#, #userid:VARCHAR#, 
+      #outRefundNo:VARCHAR#, #returnCode:VARCHAR#, #returnMsg:VARCHAR#, #resultCode:VARCHAR#, 
+      #errCode:VARCHAR#, #errCodeDes:VARCHAR#, #refundId:VARCHAR#, #refundChannel:VARCHAR#, 
+      #cashFee:INTEGER#, #cashRefundFee:INTEGER#, #feeType:VARCHAR#, #refundCount:INTEGER#, 
+      #outRefundNoN:VARCHAR#, #refundIdN:VARCHAR#, #refundChannelN:VARCHAR#, #refundFeeN:INTEGER#, 
+      #refundStatusN:VARCHAR#, #refundRecvAccoutN:VARCHAR#, #isdelated:CHAR#, #createname:VARCHAR#, 
+      #updatename:VARCHAR#, #createtime:TIMESTAMP#, #updatetime:TIMESTAMP#)
+  </insert>
+  <insert id="insertSelective" parameterClass="com.pugilist.model.PayWeixinRefundBean">
+    insert into t_cumulation_wall_detail_refund_wx
+    <dynamic prepend="(">
+      <isNotNull prepend="," property="id">
+        id
+      </isNotNull>
+      <isNotNull prepend="," property="appid">
+        appid
+      </isNotNull>
+      <isNotNull prepend="," property="mchId">
+        mch_id
+      </isNotNull>
+      <isNotNull prepend="," property="outTradeNo">
+        out_trade_no
+      </isNotNull>
+      <isNotNull prepend="," property="transactionId">
+        transaction_id
+      </isNotNull>
+      <isNotNull prepend="," property="totalFee">
+        total_fee
+      </isNotNull>
+      <isNotNull prepend="," property="refundFee">
+        refund_fee
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeType">
+        refund_fee_type
+      </isNotNull>
+      <isNotNull prepend="," property="userid">
+        userId
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNo">
+        out_refund_no
+      </isNotNull>
+      <isNotNull prepend="," property="returnCode">
+        return_code
+      </isNotNull>
+      <isNotNull prepend="," property="returnMsg">
+        return_msg
+      </isNotNull>
+      <isNotNull prepend="," property="resultCode">
+        result_code
+      </isNotNull>
+      <isNotNull prepend="," property="errCode">
+        err_code
+      </isNotNull>
+      <isNotNull prepend="," property="errCodeDes">
+        err_code_des
+      </isNotNull>
+      <isNotNull prepend="," property="refundId">
+        refund_id
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannel">
+        refund_channel
+      </isNotNull>
+      <isNotNull prepend="," property="cashFee">
+        cash_fee
+      </isNotNull>
+      <isNotNull prepend="," property="cashRefundFee">
+        cash_refund_fee
+      </isNotNull>
+      <isNotNull prepend="," property="feeType">
+        fee_type
+      </isNotNull>
+      <isNotNull prepend="," property="refundCount">
+        refund_count
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNoN">
+        out_refund_no_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="refundIdN">
+        refund_id_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannelN">
+        refund_channel_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeN">
+        refund_fee_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="refundStatusN">
+        refund_status_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="refundRecvAccoutN">
+        refund_recv_accout_$$n
+      </isNotNull>
+      <isNotNull prepend="," property="isdelated">
+        isDelated
+      </isNotNull>
+      <isNotNull prepend="," property="createname">
+        createName
+      </isNotNull>
+      <isNotNull prepend="," property="updatename">
+        updateName
+      </isNotNull>
+      <isNotNull prepend="," property="createtime">
+        createTime
+      </isNotNull>
+      <isNotNull prepend="," property="updatetime">
+        updateTime
+      </isNotNull>
+      )
+    </dynamic>
+    values
+    <dynamic prepend="(">
+      <isNotNull prepend="," property="id">
+        #id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="appid">
+        #appid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mchId">
+        #mchId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="outTradeNo">
+        #outTradeNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transactionId">
+        #transactionId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="totalFee">
+        #totalFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFee">
+        #refundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeType">
+        #refundFeeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userid">
+        #userid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNo">
+        #outRefundNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="returnCode">
+        #returnCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="returnMsg">
+        #returnMsg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="resultCode">
+        #resultCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="errCode">
+        #errCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="errCodeDes">
+        #errCodeDes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundId">
+        #refundId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannel">
+        #refundChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cashFee">
+        #cashFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="cashRefundFee">
+        #cashRefundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="feeType">
+        #feeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundCount">
+        #refundCount:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNoN">
+        #outRefundNoN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundIdN">
+        #refundIdN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannelN">
+        #refundChannelN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeN">
+        #refundFeeN:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundStatusN">
+        #refundStatusN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundRecvAccoutN">
+        #refundRecvAccoutN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isdelated">
+        #isdelated:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createname">
+        #createname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updatename">
+        #updatename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime">
+        #createtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updatetime">
+        #updatetime:TIMESTAMP#
+      </isNotNull>
+      )
+    </dynamic>
+  </insert>
+  <select id="countByExample" parameterClass="com.pugilist.model.PayWeixinRefundBeanExample" resultClass="java.lang.Integer">
+    select count(*) from t_cumulation_wall_detail_refund_wx
+    <include refid="t_cumulation_wall_detail_refund_wx.Example_Where_Clause" />
+  </select>
+  <update id="updateByExampleSelective">
+    update t_cumulation_wall_detail_refund_wx
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="record.id">
+        id = #record.id:BIGINT#
+      </isNotNull>
+      <isNotNull prepend="," property="record.appid">
+        appid = #record.appid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.mchId">
+        mch_id = #record.mchId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.outTradeNo">
+        out_trade_no = #record.outTradeNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.transactionId">
+        transaction_id = #record.transactionId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.totalFee">
+        total_fee = #record.totalFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundFee">
+        refund_fee = #record.refundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundFeeType">
+        refund_fee_type = #record.refundFeeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.userid">
+        userId = #record.userid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.outRefundNo">
+        out_refund_no = #record.outRefundNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.returnCode">
+        return_code = #record.returnCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.returnMsg">
+        return_msg = #record.returnMsg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.resultCode">
+        result_code = #record.resultCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.errCode">
+        err_code = #record.errCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.errCodeDes">
+        err_code_des = #record.errCodeDes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundId">
+        refund_id = #record.refundId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundChannel">
+        refund_channel = #record.refundChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cashFee">
+        cash_fee = #record.cashFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.cashRefundFee">
+        cash_refund_fee = #record.cashRefundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.feeType">
+        fee_type = #record.feeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundCount">
+        refund_count = #record.refundCount:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.outRefundNoN">
+        out_refund_no_$$n = #record.outRefundNoN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundIdN">
+        refund_id_$$n = #record.refundIdN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundChannelN">
+        refund_channel_$$n = #record.refundChannelN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundFeeN">
+        refund_fee_$$n = #record.refundFeeN:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundStatusN">
+        refund_status_$$n = #record.refundStatusN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.refundRecvAccoutN">
+        refund_recv_accout_$$n = #record.refundRecvAccoutN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.isdelated">
+        isDelated = #record.isdelated:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createname">
+        createName = #record.createname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.updatename">
+        updateName = #record.updatename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="record.createtime">
+        createTime = #record.createtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="record.updatetime">
+        updateTime = #record.updatetime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    <isParameterPresent>
+      <include refid="t_cumulation_wall_detail_refund_wx.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByExample">
+    update t_cumulation_wall_detail_refund_wx
+    set id = #record.id:BIGINT#,
+      appid = #record.appid:VARCHAR#,
+      mch_id = #record.mchId:VARCHAR#,
+      out_trade_no = #record.outTradeNo:VARCHAR#,
+      transaction_id = #record.transactionId:VARCHAR#,
+      total_fee = #record.totalFee:INTEGER#,
+      refund_fee = #record.refundFee:INTEGER#,
+      refund_fee_type = #record.refundFeeType:VARCHAR#,
+      userId = #record.userid:VARCHAR#,
+      out_refund_no = #record.outRefundNo:VARCHAR#,
+      return_code = #record.returnCode:VARCHAR#,
+      return_msg = #record.returnMsg:VARCHAR#,
+      result_code = #record.resultCode:VARCHAR#,
+      err_code = #record.errCode:VARCHAR#,
+      err_code_des = #record.errCodeDes:VARCHAR#,
+      refund_id = #record.refundId:VARCHAR#,
+      refund_channel = #record.refundChannel:VARCHAR#,
+      cash_fee = #record.cashFee:INTEGER#,
+      cash_refund_fee = #record.cashRefundFee:INTEGER#,
+      fee_type = #record.feeType:VARCHAR#,
+      refund_count = #record.refundCount:INTEGER#,
+      out_refund_no_$$n = #record.outRefundNoN:VARCHAR#,
+      refund_id_$$n = #record.refundIdN:VARCHAR#,
+      refund_channel_$$n = #record.refundChannelN:VARCHAR#,
+      refund_fee_$$n = #record.refundFeeN:INTEGER#,
+      refund_status_$$n = #record.refundStatusN:VARCHAR#,
+      refund_recv_accout_$$n = #record.refundRecvAccoutN:VARCHAR#,
+      isDelated = #record.isdelated:CHAR#,
+      createName = #record.createname:VARCHAR#,
+      updateName = #record.updatename:VARCHAR#,
+      createTime = #record.createtime:TIMESTAMP#,
+      updateTime = #record.updatetime:TIMESTAMP#
+    <isParameterPresent>
+      <include refid="t_cumulation_wall_detail_refund_wx.Example_Where_Clause" />
+    </isParameterPresent>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterClass="com.pugilist.model.PayWeixinRefundBean">
+    update t_cumulation_wall_detail_refund_wx
+    <dynamic prepend="set">
+      <isNotNull prepend="," property="appid">
+        appid = #appid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="mchId">
+        mch_id = #mchId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="outTradeNo">
+        out_trade_no = #outTradeNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="transactionId">
+        transaction_id = #transactionId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="totalFee">
+        total_fee = #totalFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFee">
+        refund_fee = #refundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeType">
+        refund_fee_type = #refundFeeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="userid">
+        userId = #userid:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNo">
+        out_refund_no = #outRefundNo:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="returnCode">
+        return_code = #returnCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="returnMsg">
+        return_msg = #returnMsg:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="resultCode">
+        result_code = #resultCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="errCode">
+        err_code = #errCode:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="errCodeDes">
+        err_code_des = #errCodeDes:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundId">
+        refund_id = #refundId:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannel">
+        refund_channel = #refundChannel:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="cashFee">
+        cash_fee = #cashFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="cashRefundFee">
+        cash_refund_fee = #cashRefundFee:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="feeType">
+        fee_type = #feeType:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundCount">
+        refund_count = #refundCount:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="outRefundNoN">
+        out_refund_no_$$n = #outRefundNoN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundIdN">
+        refund_id_$$n = #refundIdN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundChannelN">
+        refund_channel_$$n = #refundChannelN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundFeeN">
+        refund_fee_$$n = #refundFeeN:INTEGER#
+      </isNotNull>
+      <isNotNull prepend="," property="refundStatusN">
+        refund_status_$$n = #refundStatusN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="refundRecvAccoutN">
+        refund_recv_accout_$$n = #refundRecvAccoutN:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="isdelated">
+        isDelated = #isdelated:CHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createname">
+        createName = #createname:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="updatename">
+        updateName = #updatename:VARCHAR#
+      </isNotNull>
+      <isNotNull prepend="," property="createtime">
+        createTime = #createtime:TIMESTAMP#
+      </isNotNull>
+      <isNotNull prepend="," property="updatetime">
+        updateTime = #updatetime:TIMESTAMP#
+      </isNotNull>
+    </dynamic>
+    where id = #id:BIGINT#
+  </update>
+  <update id="updateByPrimaryKey" parameterClass="com.pugilist.model.PayWeixinRefundBean">
+    update t_cumulation_wall_detail_refund_wx
+    set appid = #appid:VARCHAR#,
+      mch_id = #mchId:VARCHAR#,
+      out_trade_no = #outTradeNo:VARCHAR#,
+      transaction_id = #transactionId:VARCHAR#,
+      total_fee = #totalFee:INTEGER#,
+      refund_fee = #refundFee:INTEGER#,
+      refund_fee_type = #refundFeeType:VARCHAR#,
+      userId = #userid:VARCHAR#,
+      out_refund_no = #outRefundNo:VARCHAR#,
+      return_code = #returnCode:VARCHAR#,
+      return_msg = #returnMsg:VARCHAR#,
+      result_code = #resultCode:VARCHAR#,
+      err_code = #errCode:VARCHAR#,
+      err_code_des = #errCodeDes:VARCHAR#,
+      refund_id = #refundId:VARCHAR#,
+      refund_channel = #refundChannel:VARCHAR#,
+      cash_fee = #cashFee:INTEGER#,
+      cash_refund_fee = #cashRefundFee:INTEGER#,
+      fee_type = #feeType:VARCHAR#,
+      refund_count = #refundCount:INTEGER#,
+      out_refund_no_$$n = #outRefundNoN:VARCHAR#,
+      refund_id_$$n = #refundIdN:VARCHAR#,
+      refund_channel_$$n = #refundChannelN:VARCHAR#,
+      refund_fee_$$n = #refundFeeN:INTEGER#,
+      refund_status_$$n = #refundStatusN:VARCHAR#,
+      refund_recv_accout_$$n = #refundRecvAccoutN:VARCHAR#,
+      isDelated = #isdelated:CHAR#,
+      createName = #createname:VARCHAR#,
+      updateName = #updatename:VARCHAR#,
+      createTime = #createtime:TIMESTAMP#,
+      updateTime = #updatetime:TIMESTAMP#
+    where id = #id:BIGINT#
+  </update>
+</sqlMap>
