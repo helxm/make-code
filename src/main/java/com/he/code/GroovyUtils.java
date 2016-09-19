@@ -32,7 +32,7 @@ public class GroovyUtils {
 	
 	public static GroovyClassLoader loader = null;
 	private static String url = "jdbc:mysql://localhost:3306/db?root=xxx&password=xxx&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
-	private static String db = "pugilistadmin_test";
+	private static String db = "xxx";
 	public GroovyUtils() {
 		if(loader == null){
 			loader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
