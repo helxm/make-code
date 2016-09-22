@@ -31,7 +31,7 @@ public class GroovyUtils {
 	public static Logger logger = Logger.getLogger(GroovyUtils.class);
 	
 	public static GroovyClassLoader loader = null;
-	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?root=xxx&password=xxx&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
+	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?user=yuyu&password=111qqq,,,&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
 	private static String db = "pugilistadmin_test";
 	public GroovyUtils() {
 		if(loader == null){
@@ -113,7 +113,7 @@ public class GroovyUtils {
 					type = "Integer";
 					break;
 				case -5:
-					type = "Integer";
+					type = "Long";
 					break;
 				case 5:
 					type = "Integer";
@@ -155,7 +155,7 @@ public class GroovyUtils {
             	column.put("nullable", rs.getInt("NULLABLE"));
             	column.put("isKey", rs.getString("IS_AUTOINCREMENT"));
             	columns.add(column);
-                System.err.println(rs.getString("COLUMN_NAME") + " 类型=" + type + " 列大小=" + rs.getInt("COLUMN_SIZE") +   
+                System.err.println(rs.getString("COLUMN_NAME") + " 类型=" + rs.getInt("DATA_TYPE") + " 列大小=" + rs.getInt("COLUMN_SIZE") +   
                         " 注释=" + rs.getString("REMARKS") +  
                         " 是否允许为NULL=" + rs.getInt("NULLABLE"));  
                   
@@ -287,18 +287,33 @@ public class GroovyUtils {
 		makeJava(model, "controller-admin.tpl","Ctr",adminPath + "controller\\api",".java");
 	}
 	public static void main(String[] args) {
-		//String table = "p_test_make_code";
-		//String model = "TestMakeCode";//拳馆会员
+		String table = "p_test_make_code";
+		String model = "TestMakeCode";//
 		
-		String table = "t_new_user_crm";
-		String model = "GymUserNumber";//拳馆会员
+		table = "t_new_user_crm";
+		model = "GymMenberShip";//拳馆会员
+		
+		table = "p_course_book";
+		model = "CourseBook";//预约课程&私教
+		
+		//table = "p_gym_user_limit";
+		//model = "GymUserLimit";//会员拳馆额度
+		
+		//table = "p_course_crm";
+		//model = "Course";//课程
+		
+		//table = "p_course_charge_record";
+		//model = "CourseChargeRecord";//课程费用支付记录
+		
+		table = "p_course_check";
+		model = "CourseCheck";//课程签到
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("tableName", table);
 		map.put("modelName", model);
 		List<Map<String,Object>> columns = getTableInfo(table);
 		map.put("columns", columns);
-		makeSystem(map);
+		//makeSystem(map);
 		makeAdmin(map);
 		
 		String path = GroovyUtils.class.getResource("").getPath();

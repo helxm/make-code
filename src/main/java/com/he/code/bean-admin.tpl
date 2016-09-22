@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.rainbowbus.bean.base.BaseBean;
 /**
- * ${modelName}
+ * ${modelName} - ${tableName}
  *
  * @author hesh
  * @date <% import java.util.Date; print new Date(); %>
