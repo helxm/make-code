@@ -273,9 +273,15 @@ public class GroovyUtils {
 	
 	public static void makeSystem(Map<String, Object> model){
 		String systemPath = "E:\\work\\git\\pugilist_system\\src\\com\\cmcc\\census\\pugilist\\";
-		//makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
-		//makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
+		makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
+		makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
 		//makeJava(model, "action-system.tpl","Action",systemPath + "actions",".java");
+	}
+	public static void makeCrm(Map<String, Object> model){
+		String systemPath = "E:\\work\\git\\pugilist_crm\\src\\com\\cmcc\\census\\pugilist\\";
+		makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
+		makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
+		makeJava(model, "action-system.tpl","Action",systemPath + "actions",".java");
 	}
 	public static void makeAdmin(Map<String, Object> model){
 		String adminPath = "E:\\work\\git\\pugilist_admin\\src\\com\\rainbowbus\\";
@@ -293,8 +299,8 @@ public class GroovyUtils {
 		table = "t_new_user_crm";
 		model = "GymMenberShip";//拳馆会员
 		
-		table = "p_course_book";
-		model = "CourseBook";//预约课程&私教
+		//table = "p_course_book";
+		//model = "CourseBook";//预约课程&私教
 		
 		//table = "p_gym_user_limit";
 		//model = "GymUserLimit";//会员拳馆额度
@@ -305,8 +311,11 @@ public class GroovyUtils {
 		//table = "p_course_charge_record";
 		//model = "CourseChargeRecord";//课程费用支付记录
 		
-		table = "p_course_check";
-		model = "CourseCheck";//课程签到
+		//table = "p_course_check";
+		//model = "CourseCheck";//课程签到
+		
+		table = "p_course_book";
+		model = "CourseBook";//拳馆会员
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("tableName", table);
@@ -314,7 +323,8 @@ public class GroovyUtils {
 		List<Map<String,Object>> columns = getTableInfo(table);
 		map.put("columns", columns);
 		//makeSystem(map);
-		makeAdmin(map);
+		makeCrm(map);
+		//makeAdmin(map);
 		
 		String path = GroovyUtils.class.getResource("").getPath();
 	    System.out.println(path);//获取绝对路径

@@ -69,9 +69,22 @@
        			print "        </if> \n"; 
        		}
        		else if(n.type == "Timestamp" ) {
-       			print "        <if test=\"" + n.name + " != null \"> \n"; 
-       			print "        	and CONVERT(t1." + n.name + ",DATE) = CONVERT(#{" + n.name + "},DATE) \n"; 
-       			print "        </if> \n"; 
+       			print "        <choose> \n"; 
+		        print "           <when test=\"startTime != null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " BETWEEN #{startTime} and #{endTime}  \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime != null and endTime == null\"> \n"; 
+		        print "                and t1." + n.name + " &gt; #{startTime}  \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime == null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " &lt; #{endTime}  \n"; 
+		        print "           </when>
+		        print "           <when test=\"" + n.name + " != null\"> \n"; 
+		        print "                and CONVERT(t1." + n.name + ",DATE) = CONVERT(#{" + n.name + "},DATE) \n"; 
+		        print "           </when> \n"; 
+		        print "           <otherwise> \n"; 
+		        print "           </otherwise> \n"; 
+		        print "        </choose> \n"; 
        		}
        	}%>
     </select>   
@@ -113,9 +126,23 @@
        			print "        </if> \n"; 
        		}
        		else if(n.type == "Timestamp" ) {
-       			print "        <if test=\"" + n.name + " != null \"> \n"; 
-       			print "        	and CONVERT(t1." + n.name + ",DATE) = CONVERT(#{" + n.name + "},DATE) \n"; 
-       			print "        </if> \n"; 
+       			print "        <choose> \n"; 
+		        print "           <when test=\"startTime != null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " BETWEEN #{startTime} and #{endTime}   \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime != null and endTime == null\"> \n"; 
+		        print "                and t1." + n.name + " &gt; #{startTime}  \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime == null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " &lt; #{endTime}  \n"; 
+		        print "           </when>
+		        print "          <when test=\"" + n.name + " != null\"> \n"; 
+		        print "                and CONVERT(t1." + n.name + ",DATE) = CONVERT(#{" + n.name + "},DATE) \n"; 
+		        print "           </when> \n"; 
+		        print "           <otherwise> \n"; 
+		        print "           </otherwise> \n"; 
+		        print "        </choose> \n"; 
+       			
        		}
        	}%>
     </select>
@@ -139,16 +166,37 @@
        		}
        		
         }%>
-        
+	       	
         <% columns.eachWithIndex { 
        		n, i -> if(n.type == "String"){
        			print "        <if test=\"" + n.name + " != null and " + n.name + " != '' \"> \n"; 
-       			print "          and t1." + n.name + " like CONCAT('%','#{" + n.name + "}','%' ) \n"; 
+       			print "          and t1." + n.name + " like CONCAT('%','\${" + n.name + "}','%' ) \n"; 
        			print "        </if> \n"; 
+       		}else if(n.name == "isDelated" ) {
+       			
        		}else if(n.type == "Character" || n.type == "Integer"  || n.type == "Long") {
        			print "        <if test=\"" + n.name + " != null \"> \n"; 
        			print "        	and t1." + n.name + " = #{" + n.name + "} \n"; 
        			print "        </if> \n"; 
+       		}
+       		else if(n.type == "Timestamp" ) {
+       			print "        <choose> \n"; 
+		        print "           <when test=\"startTime != null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " BETWEEN #{startTime} and #{endTime}   \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime != null and endTime == null\"> \n"; 
+		        print "                and t1." + n.name + " &gt; #{startTime}  \n"; 
+		        print "           </when> \n"; 
+		        print "           <when test=\"startTime == null and endTime != null\"> \n"; 
+		        print "                and t1." + n.name + " &lt; #{endTime}  \n"; 
+		        print "           </when>
+		        print "          <when test=\"" + n.name + " != null\"> \n"; 
+		        print "                and CONVERT(t1." + n.name + ",DATE) = CONVERT(#{" + n.name + "},DATE) \n"; 
+		        print "           </when> \n"; 
+		        print "           <otherwise> \n"; 
+		        print "           </otherwise> \n"; 
+		        print "        </choose> \n"; 
+       			
        		}
        	}%>
         
