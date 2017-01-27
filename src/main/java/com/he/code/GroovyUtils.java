@@ -303,15 +303,6 @@ public class GroovyUtils {
 		String table = "p_test_make_code";
 		String model = "TestMakeCode";//
 		
-		
-		table = "t_push_record";
-		model = "PushRecord";//推送记录
-		
-		table = "t_die_pig";
-		model = "DiePig";//死亡猪
-		
-		table = "t_suggestion";
-		model = "Suggestion";//死亡猪
 		table = "t_new_user_crm";
 		model = "GymMenberShip";//拳馆会员
 		
