@@ -31,13 +31,8 @@ public class GroovyUtils {
 	public static Logger logger = Logger.getLogger(GroovyUtils.class);
 	
 	public static GroovyClassLoader loader = null;
-<<<<<<< HEAD
 	private static String url = "jdbc:mysql://localhost:3306/xst?user=root&password=&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
 	private static String db = "xst";
-=======
-	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?user=yuyu&password=111qqq,,,&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
-	private static String db = "pugilistadmin_test";
->>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 	public GroovyUtils() {
 		if(loader == null){
 			loader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
@@ -323,7 +318,6 @@ public class GroovyUtils {
 		
 		table = "p_course_book";
 		model = "CourseBook";//拳馆会员
->>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("tableName", table);
@@ -331,12 +325,9 @@ public class GroovyUtils {
 		List<Map<String,Object>> columns = getTableInfo(table);
 		map.put("columns", columns);
 		//makeSystem(map);
-<<<<<<< HEAD
 		makeAdmin(map);
-=======
 		makeCrm(map);
 		//makeAdmin(map);
->>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 		
 		String path = GroovyUtils.class.getResource("").getPath();
 	    System.out.println(path);//获取绝对路径
