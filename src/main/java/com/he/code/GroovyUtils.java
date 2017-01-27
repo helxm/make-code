@@ -31,8 +31,8 @@ public class GroovyUtils {
 	public static Logger logger = Logger.getLogger(GroovyUtils.class);
 	
 	public static GroovyClassLoader loader = null;
-	private static String url = "jdbc:mysql://localhost:3306/db?root=xxx&password=xxx&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
-	private static String db = "xxx";
+	private static String url = "jdbc:mysql://localhost:3306/xst?user=root&password=&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
+	private static String db = "xst";
 	public GroovyUtils() {
 		if(loader == null){
 			loader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
@@ -278,27 +278,36 @@ public class GroovyUtils {
 		//makeJava(model, "action-system.tpl","Action",systemPath + "actions",".java");
 	}
 	public static void makeAdmin(Map<String, Object> model){
-		String adminPath = "E:\\work\\git\\pugilist_admin\\src\\com\\rainbowbus\\";
-		makeJava(model, "bean-admin.tpl","Bean",adminPath + "bean\\api",".java");
-		makeJava(model, "mapper-xml-admin.tpl","Mapper",adminPath + "mapper",".xml");
-		makeJava(model, "mapper-admin.tpl","Mapper",adminPath + "mapper",".java");
+		String adminPath = "D:\\work\\git\\core-java\\src\\main\\java\\com\\app\\";
+		makeJava(model, "bean-admin.tpl","",adminPath + "entity",".java");
+		makeJava(model, "mapper-xml-admin.tpl","Mapper",adminPath + "dao",".xml");
+		makeJava(model, "mapper-admin.tpl","Mapper",adminPath + "dao",".java");
 		makeJava(model, "service-admin.tpl","Service",adminPath + "service",".java");
-		makeJava(model, "service-impl-admin.tpl","ServiceImpl",adminPath + "service\\impl\\api",".java");
-		makeJava(model, "controller-admin.tpl","Ctr",adminPath + "controller\\api",".java");
+		makeJava(model, "service-impl-admin.tpl","ServiceImpl",adminPath + "service\\impl",".java");
+		//makeJava(model, "controller-admin.tpl","Ctr",adminPath + "web",".java");
 	}
 	public static void main(String[] args) {
 		//String table = "p_test_make_code";
-		//String model = "TestMakeCode";//拳馆会员
+		//String model = "TestMakeCode";//
 		
 		String table = "t_new_user_crm";
-		String model = "GymUserNumber";//拳馆会员
+		String model = "GymUserNumber";//
+		
+		table = "t_push_record";
+		model = "PushRecord";//推送记录
+		
+		table = "t_die_pig";
+		model = "DiePig";//死亡猪
+		
+		table = "t_suggestion";
+		model = "Suggestion";//死亡猪
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("tableName", table);
 		map.put("modelName", model);
 		List<Map<String,Object>> columns = getTableInfo(table);
 		map.put("columns", columns);
-		makeSystem(map);
+		//makeSystem(map);
 		makeAdmin(map);
 		
 		String path = GroovyUtils.class.getResource("").getPath();
