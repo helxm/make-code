@@ -22,6 +22,7 @@ import com.rainbowbus.bean.base.ViewBean;
 import com.rainbowbus.service.impl.api.${modelName}ServiceImpl;
 import com.rainbowbus.utils.JsonUtils;
 import com.rainbowbus.validate.Group;
+import com.rainbowbus.validate.Identity;
 /**
  * ${modelName} - ${tableName}
  * @author hesh
@@ -37,6 +38,16 @@ public class ${modelName}Ctr extends BaseCtr {
 	@RequestMapping(value = "/{id}")
 	public ViewBean read(@PathVariable("id") Long id) {
 		return JsonUtils.getSuccess("获取成功", service.selectByPrimaryKey(id));
+	}
+	
+	@RequestMapping(value = "/find")
+	public ViewBean find(${modelName}Bean record
+			,BindingResult result,Errors errors
+			) {
+		if (result.hasErrors()) {
+			return JsonUtils.getError(errors);
+		}	
+		return JsonUtils.getSuccess("获取成功", service.find(record));
 	}
 	
 	@RequestMapping(value = "/list",produces = { MediaType.APPLICATION_JSON_VALUE})
@@ -74,10 +85,44 @@ public class ${modelName}Ctr extends BaseCtr {
 			
 			flag = service.insert(record);
 		}
-		logger.info("更新用户，操作人id： " + record.getCreateName());
+		
+		logger.info("保存操作，操作人id： " + user.getOlduserid());
+		logger.info("保存操作，操作人姓名： " + user.getUsername());
+		
 		if(flag > 0 ){
 			return JsonUtils.getSuccess("操作成功");
 		}
 		return JsonUtils.getError("操作失败");
+	}
+	
+	@RequestMapping(value = "/delete\$${modelName}")
+	public ViewBean del(@Validated(Identity.class) ${modelName}Bean record,BindingResult result,
+			Errors errors
+			) throws Exception {
+		if (result.hasErrors()) {
+			return JsonUtils.getError(errors);
+		}
+		record.setIsDelated('0');
+		record.setUpdateName(user.getUsername());
+		record.setUpdateTime(new Timestamp(System.currentTimeMillis()));
+		int flag = service.updateByPrimaryKey(record);
+		
+		logger.info("更新操作，操作人id： " + user.getOlduserid());
+		logger.info("删除操作，操作人姓名： " + user.getUsername());
+		
+		if(flag > 0 ){
+			return JsonUtils.getSuccess("操作成功");
+		}
+		return JsonUtils.getError("操作失败");
+	}
+	
+	@RequestMapping(value = "/count")
+	public ViewBean count(@Validated(Group.class) ${modelName}Bean record,BindingResult result,
+			Errors errors
+			) throws Exception {
+		if (result.hasErrors()) {
+			return JsonUtils.getError(errors);
+		}
+		return JsonUtils.getSuccess("操作成功",service.countAll(record));
 	}
 }

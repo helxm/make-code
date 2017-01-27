@@ -31,8 +31,13 @@ public class GroovyUtils {
 	public static Logger logger = Logger.getLogger(GroovyUtils.class);
 	
 	public static GroovyClassLoader loader = null;
+<<<<<<< HEAD
 	private static String url = "jdbc:mysql://localhost:3306/xst?user=root&password=&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
 	private static String db = "xst";
+=======
+	private static String url = "jdbc:mysql://121.42.44.216:3306/pugilistadmin_test?user=yuyu&password=111qqq,,,&autoReconnect=true&failOverReadOnly=false&characterEncoding=utf8";
+	private static String db = "pugilistadmin_test";
+>>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 	public GroovyUtils() {
 		if(loader == null){
 			loader = new GroovyClassLoader(ClassLoader.getSystemClassLoader());
@@ -113,7 +118,7 @@ public class GroovyUtils {
 					type = "Integer";
 					break;
 				case -5:
-					type = "Integer";
+					type = "Long";
 					break;
 				case 5:
 					type = "Integer";
@@ -155,7 +160,7 @@ public class GroovyUtils {
             	column.put("nullable", rs.getInt("NULLABLE"));
             	column.put("isKey", rs.getString("IS_AUTOINCREMENT"));
             	columns.add(column);
-                System.err.println(rs.getString("COLUMN_NAME") + " 类型=" + type + " 列大小=" + rs.getInt("COLUMN_SIZE") +   
+                System.err.println(rs.getString("COLUMN_NAME") + " 类型=" + rs.getInt("DATA_TYPE") + " 列大小=" + rs.getInt("COLUMN_SIZE") +   
                         " 注释=" + rs.getString("REMARKS") +  
                         " 是否允许为NULL=" + rs.getInt("NULLABLE"));  
                   
@@ -273,9 +278,15 @@ public class GroovyUtils {
 	
 	public static void makeSystem(Map<String, Object> model){
 		String systemPath = "E:\\work\\git\\pugilist_system\\src\\com\\cmcc\\census\\pugilist\\";
-		//makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
-		//makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
+		makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
+		makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
 		//makeJava(model, "action-system.tpl","Action",systemPath + "actions",".java");
+	}
+	public static void makeCrm(Map<String, Object> model){
+		String systemPath = "E:\\work\\git\\pugilist_crm\\src\\com\\cmcc\\census\\pugilist\\";
+		makeJava(model, "bean-system.tpl","",systemPath + "dtos",".java");
+		makeJava(model, "dao-system.tpl","DAO",systemPath + "daos",".java");
+		makeJava(model, "action-system.tpl","Action",systemPath + "actions",".java");
 	}
 	public static void makeAdmin(Map<String, Object> model){
 		String adminPath = "D:\\work\\git\\core-java\\src\\main\\java\\com\\app\\";
@@ -289,9 +300,9 @@ public class GroovyUtils {
 	public static void main(String[] args) {
 		//String table = "p_test_make_code";
 		//String model = "TestMakeCode";//
+		String table = "p_test_make_code";
+		String model = "TestMakeCode";//
 		
-		String table = "t_new_user_crm";
-		String model = "GymUserNumber";//
 		
 		table = "t_push_record";
 		model = "PushRecord";//推送记录
@@ -301,6 +312,27 @@ public class GroovyUtils {
 		
 		table = "t_suggestion";
 		model = "Suggestion";//死亡猪
+		table = "t_new_user_crm";
+		model = "GymMenberShip";//拳馆会员
+		
+		//table = "p_course_book";
+		//model = "CourseBook";//预约课程&私教
+		
+		//table = "p_gym_user_limit";
+		//model = "GymUserLimit";//会员拳馆额度
+		
+		//table = "p_course_crm";
+		//model = "Course";//课程
+		
+		//table = "p_course_charge_record";
+		//model = "CourseChargeRecord";//课程费用支付记录
+		
+		//table = "p_course_check";
+		//model = "CourseCheck";//课程签到
+		
+		table = "p_course_book";
+		model = "CourseBook";//拳馆会员
+>>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("tableName", table);
@@ -308,7 +340,12 @@ public class GroovyUtils {
 		List<Map<String,Object>> columns = getTableInfo(table);
 		map.put("columns", columns);
 		//makeSystem(map);
+<<<<<<< HEAD
 		makeAdmin(map);
+=======
+		makeCrm(map);
+		//makeAdmin(map);
+>>>>>>> branch 'master' of https://github.com/helxm/make-code.git
 		
 		String path = GroovyUtils.class.getResource("").getPath();
 	    System.out.println(path);//获取绝对路径

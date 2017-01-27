@@ -1,7 +1,5 @@
 package com.rainbowbus.service.impl.api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +21,5 @@ public class ${modelName}ServiceImpl extends AbstractService<${modelName}Bean,Lo
 	public void setBaseMapper() {
 		super.setBaseMapper(mapper);
 		
-	}
-	
-	public List<${modelName}Bean> queryAll(${modelName}Bean record) {
-		return mapper.queryAll(record);
 	}
 }

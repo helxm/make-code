@@ -1,0 +1,607 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pugilist.persistence.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.pugilist.model.User">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="olduserid" jdbcType="VARCHAR" property="olduserid" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="headpic" jdbcType="VARCHAR" property="headpic" />
+    <result column="stemfrom" jdbcType="VARCHAR" property="stemfrom" />
+    <result column="telmodel" jdbcType="VARCHAR" property="telmodel" />
+    <result column="imei" jdbcType="VARCHAR" property="imei" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="remorks" jdbcType="VARCHAR" property="remorks" />
+    <result column="lastlogintime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="cardType" jdbcType="VARCHAR" property="cardType" />
+    <result column="cardNo" jdbcType="VARCHAR" property="cardNo" />
+    <result column="lastModifyName" jdbcType="VARCHAR" property="lastModifyName" />
+    <result column="openId" jdbcType="VARCHAR" property="openId" />
+    <result column="unionId" jdbcType="VARCHAR" property="unionId" />
+    <result column="registertime" jdbcType="TIMESTAMP" property="registertime" />
+    <result column="unionuserid" jdbcType="VARCHAR" property="unionuserid" />
+    <result column="wxopenId" jdbcType="VARCHAR" property="wxopenId" />
+    <result column="effect" jdbcType="VARCHAR" property="effect" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="fansCount" jdbcType="INTEGER" property="fansCount" />
+    <result column="commentCount" jdbcType="INTEGER" property="commentCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    userid, tel, username, olduserid, token, realname, password, headpic, stemfrom, telmodel, 
+    imei, email, remorks, lastlogintime, sex, birthday, cardType, cardNo, lastModifyName, 
+    openId, unionId, registertime, unionuserid, wxopenId, effect, height, weight, address, 
+    fansCount, commentCount
+  </sql>
+  <select id="selectByExample" parameterType="com.pugilist.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_new_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_new_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_new_user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pugilist.model.UserExample">
+    delete from t_new_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pugilist.model.User">
+    insert into t_new_user (userid, tel, username, 
+      olduserid, token, realname, 
+      password, headpic, stemfrom, 
+      telmodel, imei, email, 
+      remorks, lastlogintime, sex, 
+      birthday, cardType, cardNo, 
+      lastModifyName, openId, unionId, 
+      registertime, unionuserid, wxopenId, 
+      effect, height, weight, 
+      address, fansCount, commentCount
+      )
+    values (#{userid,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{olduserid,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{headpic,jdbcType=VARCHAR}, #{stemfrom,jdbcType=VARCHAR}, 
+      #{telmodel,jdbcType=VARCHAR}, #{imei,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{remorks,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=TIMESTAMP}, #{sex,jdbcType=VARCHAR}, 
+      #{birthday,jdbcType=TIMESTAMP}, #{cardType,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{lastModifyName,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{unionId,jdbcType=VARCHAR}, 
+      #{registertime,jdbcType=TIMESTAMP}, #{unionuserid,jdbcType=VARCHAR}, #{wxopenId,jdbcType=VARCHAR}, 
+      #{effect,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{fansCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pugilist.model.User">
+    insert into t_new_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="olduserid != null">
+        olduserid,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="headpic != null">
+        headpic,
+      </if>
+      <if test="stemfrom != null">
+        stemfrom,
+      </if>
+      <if test="telmodel != null">
+        telmodel,
+      </if>
+      <if test="imei != null">
+        imei,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="remorks != null">
+        remorks,
+      </if>
+      <if test="lastlogintime != null">
+        lastlogintime,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="cardType != null">
+        cardType,
+      </if>
+      <if test="cardNo != null">
+        cardNo,
+      </if>
+      <if test="lastModifyName != null">
+        lastModifyName,
+      </if>
+      <if test="openId != null">
+        openId,
+      </if>
+      <if test="unionId != null">
+        unionId,
+      </if>
+      <if test="registertime != null">
+        registertime,
+      </if>
+      <if test="unionuserid != null">
+        unionuserid,
+      </if>
+      <if test="wxopenId != null">
+        wxopenId,
+      </if>
+      <if test="effect != null">
+        effect,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="fansCount != null">
+        fansCount,
+      </if>
+      <if test="commentCount != null">
+        commentCount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="olduserid != null">
+        #{olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headpic != null">
+        #{headpic,jdbcType=VARCHAR},
+      </if>
+      <if test="stemfrom != null">
+        #{stemfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="telmodel != null">
+        #{telmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remorks != null">
+        #{remorks,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardType != null">
+        #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyName != null">
+        #{lastModifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null">
+        #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null">
+        #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unionuserid != null">
+        #{unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxopenId != null">
+        #{wxopenId,jdbcType=VARCHAR},
+      </if>
+      <if test="effect != null">
+        #{effect,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fansCount != null">
+        #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pugilist.model.UserExample" resultType="java.lang.Integer">
+    select count(*) from t_new_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_new_user
+    <set>
+      <if test="record.userid != null">
+        userid = #{record.userid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tel != null">
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.olduserid != null">
+        olduserid = #{record.olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.token != null">
+        token = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null">
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headpic != null">
+        headpic = #{record.headpic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stemfrom != null">
+        stemfrom = #{record.stemfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telmodel != null">
+        telmodel = #{record.telmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imei != null">
+        imei = #{record.imei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remorks != null">
+        remorks = #{record.remorks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastlogintime != null">
+        lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cardType != null">
+        cardType = #{record.cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null">
+        cardNo = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastModifyName != null">
+        lastModifyName = #{record.lastModifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        openId = #{record.openId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionId != null">
+        unionId = #{record.unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registertime != null">
+        registertime = #{record.registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unionuserid != null">
+        unionuserid = #{record.unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wxopenId != null">
+        wxopenId = #{record.wxopenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effect != null">
+        effect = #{record.effect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fansCount != null">
+        fansCount = #{record.fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentCount != null">
+        commentCount = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_new_user
+    set userid = #{record.userid,jdbcType=INTEGER},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      olduserid = #{record.olduserid,jdbcType=VARCHAR},
+      token = #{record.token,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      headpic = #{record.headpic,jdbcType=VARCHAR},
+      stemfrom = #{record.stemfrom,jdbcType=VARCHAR},
+      telmodel = #{record.telmodel,jdbcType=VARCHAR},
+      imei = #{record.imei,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      remorks = #{record.remorks,jdbcType=VARCHAR},
+      lastlogintime = #{record.lastlogintime,jdbcType=TIMESTAMP},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      cardType = #{record.cardType,jdbcType=VARCHAR},
+      cardNo = #{record.cardNo,jdbcType=VARCHAR},
+      lastModifyName = #{record.lastModifyName,jdbcType=VARCHAR},
+      openId = #{record.openId,jdbcType=VARCHAR},
+      unionId = #{record.unionId,jdbcType=VARCHAR},
+      registertime = #{record.registertime,jdbcType=TIMESTAMP},
+      unionuserid = #{record.unionuserid,jdbcType=VARCHAR},
+      wxopenId = #{record.wxopenId,jdbcType=VARCHAR},
+      effect = #{record.effect,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      weight = #{record.weight,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      fansCount = #{record.fansCount,jdbcType=INTEGER},
+      commentCount = #{record.commentCount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pugilist.model.User">
+    update t_new_user
+    <set>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="olduserid != null">
+        olduserid = #{olduserid,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="headpic != null">
+        headpic = #{headpic,jdbcType=VARCHAR},
+      </if>
+      <if test="stemfrom != null">
+        stemfrom = #{stemfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="telmodel != null">
+        telmodel = #{telmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="imei != null">
+        imei = #{imei,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="remorks != null">
+        remorks = #{remorks,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cardType != null">
+        cardType = #{cardType,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null">
+        cardNo = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifyName != null">
+        lastModifyName = #{lastModifyName,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        openId = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="unionId != null">
+        unionId = #{unionId,jdbcType=VARCHAR},
+      </if>
+      <if test="registertime != null">
+        registertime = #{registertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unionuserid != null">
+        unionuserid = #{unionuserid,jdbcType=VARCHAR},
+      </if>
+      <if test="wxopenId != null">
+        wxopenId = #{wxopenId,jdbcType=VARCHAR},
+      </if>
+      <if test="effect != null">
+        effect = #{effect,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fansCount != null">
+        fansCount = #{fansCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        commentCount = #{commentCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pugilist.model.User">
+    update t_new_user
+    set tel = #{tel,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      olduserid = #{olduserid,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      headpic = #{headpic,jdbcType=VARCHAR},
+      stemfrom = #{stemfrom,jdbcType=VARCHAR},
+      telmodel = #{telmodel,jdbcType=VARCHAR},
+      imei = #{imei,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      remorks = #{remorks,jdbcType=VARCHAR},
+      lastlogintime = #{lastlogintime,jdbcType=TIMESTAMP},
+      sex = #{sex,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      cardType = #{cardType,jdbcType=VARCHAR},
+      cardNo = #{cardNo,jdbcType=VARCHAR},
+      lastModifyName = #{lastModifyName,jdbcType=VARCHAR},
+      openId = #{openId,jdbcType=VARCHAR},
+      unionId = #{unionId,jdbcType=VARCHAR},
+      registertime = #{registertime,jdbcType=TIMESTAMP},
+      unionuserid = #{unionuserid,jdbcType=VARCHAR},
+      wxopenId = #{wxopenId,jdbcType=VARCHAR},
+      effect = #{effect,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      fansCount = #{fansCount,jdbcType=INTEGER},
+      commentCount = #{commentCount,jdbcType=INTEGER}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>
